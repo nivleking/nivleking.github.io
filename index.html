@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" sizes="72x72" href="src/images/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="src/images/icons/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="src/images/icons/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="src/images/icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="src/images/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="src/images/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="src/images/icons/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="src/images/icons/icon-512x512.png">
+    <title>PWA Fitness</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-brand-lg bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-auto" href="#">
+                <h2>Dribble</h2>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h4 class="mb-2 text-center">Fitness App</h4>
+        <p class="text-center">
+            5.538 inspirational workouts from the world's best athlete. Want more
+            inspiration? Browse our catalog
+        </p>
+
+        <div class="row" id="workout-cards">
+            <div class="col-md-3 mb-3 mt-3">
+                <div class="card">
+                    <img src="https://source.unsplash.com/1200x400?" class="card-img-top"
+                        style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Push Up</h5>
+                        <p class="card-text text-muted" style="text-align: justify;">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero
+                            vitae repudiandae voluptate?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="workoutModal" tabindex="-1" aria-labelledby="workoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="workoutModalLabel">Workout Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="workoutImage" src="" class="img-fluid mb-3">
+                    <h5 id="workoutName"></h5>
+                    <p id="workoutDetails"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/js/promise.js"></script>
+    <script src="/src/js/fetch.js"></script>
+    <script src="/src/js/idb.js"></script>
+    <script src="/src/js/utility.js"></script>
+    <script src="/src/js/app.js"></script>
+    <script src="/src/js/card.js"></script>
+
+</body>
+
+</html>

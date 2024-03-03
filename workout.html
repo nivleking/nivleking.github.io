@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Details</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-brand-lg bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-auto" href="#">
+                <h2>Dribble</h2>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <a href="index.html" class="btn btn-danger">Back</a>
+        <h1 id="workoutName" class="mt-5"></h1>
+        <img id="workoutImage" class="img-fluid mt-3" alt="Workout image">
+        <p id="workoutDetail" class="lead mt-3"></p>
+    </div>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.onload = function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var name = urlParams.get('name');
+            var detail = urlParams.get('detail');
+            var image = urlParams.get('image');
+
+            document.getElementById('workoutName').textContent = decodeURIComponent(name);
+            document.getElementById('workoutDetail').textContent = decodeURIComponent(detail);
+            document.getElementById('workoutImage').src = decodeURIComponent(image);
+        }
+    </script>
+</body>
+
+</html>
