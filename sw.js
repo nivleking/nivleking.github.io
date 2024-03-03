@@ -16,6 +16,9 @@ var STATIC_FILES = [
   "/workout.html",
   "/src/css/bootstrap.min.css",
   "/src/js/bootstrap.bundle.min.js",
+  "/src/images/icons/*",
+  "/favicon.ico",
+  "/node_modules/*",
 ];
 
 self.addEventListener("install", function (event) {
