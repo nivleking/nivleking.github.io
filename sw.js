@@ -18,7 +18,7 @@ var STATIC_FILES = [
   "/src/js/bootstrap.bundle.min.js",
   "/src/images/icons/*",
   "/favicon.ico",
-  "/node_modules/*",
+  // "/node_modules/*",
 ];
 
 self.addEventListener("install", function (event) {
