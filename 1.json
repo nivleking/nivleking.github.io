@@ -1,0 +1,50 @@
+[
+  {
+    "detail": "Lorem ipsum dolor sit amet,consectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero vitae repudiandae voluptate?",
+    "id": "0",
+    "image": "https://img.freepik.com/free-photo/sports-tools_53876-138077.jpg?w=1380&t=st=1709524282~exp=1709524882~hmac=cd4cf26fff01de7d9d1452fb9487c530fe882243147ef2724791cd2f2e3a8d49",
+    "name": "Push Up"
+  },
+  {
+    "detail": "Lorem ipsum dolor sit amet,consectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero vitae repudiandae voluptate?",
+    "id": "1",
+    "image": "https://img.freepik.com/free-photo/sports-tools_53876-138077.jpg?w=1380&t=st=1709524282~exp=1709524882~hmac=cd4cf26fff01de7d9d1452fb9487c530fe882243147ef2724791cd2f2e3a8d49",
+    "name": "Sit Up"
+  },
+  {
+    "detail": "Lorem ipsum dolor sit amet,onsectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero vitae repudiandae voluptate?",
+    "id": "2",
+    "image": "https://img.freepik.com/free-photo/sports-tools_53876-138077.jpg?w=1380&t=st=1709524282~exp=1709524882~hmac=cd4cf26fff01de7d9d1452fb9487c530fe882243147ef2724791cd2f2e3a8d49",
+    "name": "Dead Lift"
+  },
+  {
+    "detail": "Lorem ipsum dolor sit amet,consectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero vitae repudiandae voluptate?",
+    "id": "3",
+    "image": "https://img.freepik.com/free-photo/sports-tools_53876-138077.jpg?w=1380&t=st=1709524282~exp=1709524882~hmac=cd4cf26fff01de7d9d1452fb9487c530fe882243147ef2724791cd2f2e3a8d49",
+    "name": "Running"
+  },
+  {
+    "detail": "Lorem ipsum dolor sit amet,consectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero vitae repudiandae voluptate?",
+    "id": "4",
+    "image": "https://img.freepik.com/free-photo/sports-tools_53876-138077.jpg?w=1380&t=st=1709524282~exp=1709524882~hmac=cd4cf26fff01de7d9d1452fb9487c530fe882243147ef2724791cd2f2e3a8d49",
+    "name": "Lifting"
+  },
+  {
+    "detail": "Lorem ipsum dolor sit amet,consectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero vitae repudiandae voluptate?",
+    "id": "5",
+    "image": "https://img.freepik.com/free-photo/sports-tools_53876-138077.jpg?w=1380&t=st=1709524282~exp=1709524882~hmac=cd4cf26fff01de7d9d1452fb9487c530fe882243147ef2724791cd2f2e3a8d49",
+    "name": "Dumbell Overhead"
+  },
+  {
+    "detail": "Lorem ipsum dolor sit amet,consectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero vitae repudiandae voluptate?",
+    "id": "6",
+    "image": "https://img.freepik.com/free-photo/sports-tools_53876-138077.jpg?w=1380&t=st=1709524282~exp=1709524882~hmac=cd4cf26fff01de7d9d1452fb9487c530fe882243147ef2724791cd2f2e3a8d49",
+    "name": "Lateral Raises"
+  },
+  {
+    "detail": "Lorem ipsum dolor sit amet,consectetur adipisicing elit. Fuga dolores blanditiis laborum nisi a dicta dolor, libero vitae repudiandae voluptate?",
+    "id": "7",
+    "image": "https://img.freepik.com/free-photo/sports-tools_53876-138077.jpg?w=1380&t=st=1709524282~exp=1709524882~hmac=cd4cf26fff01de7d9d1452fb9487c530fe882243147ef2724791cd2f2e3a8d49",
+    "name": "Weight Lifting"
+  }
+]

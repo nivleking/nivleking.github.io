@@ -6,21 +6,6 @@ var modalName = document.getElementById("workoutName");
 var modalDetails = document.getElementById("workoutDetails");
 var workoutCardArea = document.getElementById("workout-cards");
 
-// cards.forEach(function (card) {
-//   card.addEventListener("click", function () {
-//     var imgSrc = card.querySelector(".card-img-top").src;
-//     var name = card.querySelector(".card-title").textContent;
-//     var details = card.querySelector(".card-text").textContent;
-
-//     modalImg.src = imgSrc;
-//     modalName.textContent = name;
-//     modalDetails.textContent = details;
-
-//     var bootstrapModal = new bootstrap.Modal(modal);
-//     bootstrapModal.show();
-//   });
-// });
-
 function clearCards() {
   while (workoutCardArea.hasChildNodes()) {
     workoutCardArea.removeChild(workoutCardArea.lastChild);
