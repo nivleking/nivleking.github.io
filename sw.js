@@ -96,23 +96,24 @@ self.addEventListener("fetch", function (event) {
       })
     );
   } else {
-    // Cache first, then network with offline fallback for other requests
+    // Network then cache strategy for other requests
     event.respondWith(
-      caches.match(event.request).then(function (response) {
-        return (
-          response ||
-          fetch(event.request)
-            .then(function (res) {
-              return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
-                cache.put(event.request.url, res.clone());
-                return res;
-              });
-            })
-            .catch(function () {
+      fetch(event.request)
+        .then(function (res) {
+          return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
+            cache.put(event.request.url, res.clone());
+            return res;
+          });
+        })
+        .catch(function () {
+          return caches.match(event.request).then(function (res) {
+            if (res) {
+              return res;
+            } else if (event.request.headers.get("accept").includes("text/html")) {
               return caches.match("/offline.html");
-            })
-        );
-      })
+            }
+          });
+        })
     );
   }
 });
