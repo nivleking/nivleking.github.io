@@ -18,7 +18,7 @@ function createCard(data) {
   colDiv.className = "col-md-3 mb-3 mt-3 col-sm-4";
 
   var cardWrapper = document.createElement("div");
-  cardWrapper.className = "card";
+  cardWrapper.className = "card card-hover";
 
   var cardImg = document.createElement("img");
   cardImg.className = "card-img-top";

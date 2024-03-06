@@ -46,13 +46,19 @@
             window.location = '/index.html';
         }
         var data = JSON.parse(localStorage.getItem('now'));
-        document.getElementById('workoutName').innerText = data.name;
-        document.getElementById('workoutImage').src = data.image;
-        document.getElementById('workoutDetail').innerText = data.detail;
-        document.getElementById('workoutDetail').style.textAlign = 'justify';
+        var name1 = document.getElementById('workoutName');
+        name1.textContent = data.name;
+        //console.log(name);
 
-        document.getElementById('workoutImage').style.width = '50%';
-        document.getElementById('workoutImage').style.margin = 'auto';
+        var image = document.getElementById('workoutImage')
+        image.src = data.image;
+
+        var detail = document.getElementById('workoutDetail')
+
+        detail.innerText = data.detail;
+        detail.style.textAlign = 'justify';
+
+        image.style.width = '100%';
     </script>
     <script src="/src/js/bootstrap.bundle.min.js"></script>
     <script src="/src/js/bootstrap.min.js"></script>
