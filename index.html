@@ -16,19 +16,43 @@
     <title>PWA Fitness</title>
 
     <link rel="stylesheet" href="/src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar navbar-dark navbar-brand-lg bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand mx-auto" href="#">
-                <h2>Dribble</h2>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <h1 style="font-style: italic;">Dribble</h1>
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav p-2">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light" id="installBtn">Install App</button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <div class="container mt-4">
-        <h4 class="mb-2 text-center">Fitness App</h4>
+        <h1 class="mb-2 text-center" style="font-family: 'Style Script'; font-size: 72px;">Fitness App</h1>
         <p class="text-center">
             5.538 inspirational workouts from the world's best athlete. Want more
             inspiration? Browse our catalog
@@ -55,6 +79,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+    </script>
 
     <script src="/src/js/bootstrap.bundle.min.js"></script>
     <script src="/src/js/promise.js"></script>

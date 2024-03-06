@@ -7,6 +7,7 @@ var modalDetails = document.getElementById("workoutDetails");
 var workoutCardArea = document.getElementById("workout-cards");
 
 function clearCards() {
+  if (window.location.pathname === "/workout.html") return;
   while (workoutCardArea.hasChildNodes()) {
     workoutCardArea.removeChild(workoutCardArea.lastChild);
   }
@@ -14,7 +15,7 @@ function clearCards() {
 
 function createCard(data) {
   var colDiv = document.createElement("div");
-  colDiv.className = "col-md-3 mb-3 mt-3";
+  colDiv.className = "col-md-3 mb-3 mt-3 col-sm-4";
 
   var cardWrapper = document.createElement("div");
   cardWrapper.className = "card";
@@ -29,25 +30,24 @@ function createCard(data) {
   var cardBody = document.createElement("div");
   cardBody.className = "card-body";
 
-  var cardTitle = document.createElement("h5");
-  cardTitle.className = "card-title";
+  var cardTitle = document.createElement("h6");
+  cardTitle.className = "card-title text-center";
   cardTitle.textContent = data.name;
   cardBody.appendChild(cardTitle);
 
-  var cardText = document.createElement("p");
-  cardText.className = "card-text text-muted";
-  cardText.style.textAlign = "justify";
-  cardText.textContent = data.detail;
-  cardBody.appendChild(cardText);
+  // var cardText = document.createElement("p");
+  // cardText.className = "card-text text-muted";
+  // cardText.style.textAlign = "justify";
+  // cardText.textContent = data.detail;
+  // cardBody.appendChild(cardText);
 
   cardWrapper.appendChild(cardBody);
   colDiv.appendChild(cardWrapper);
 
-  // Add the event listener to the card
   colDiv.addEventListener("click", function () {
     modalImg.src = cardImg.src;
     modalName.textContent = cardTitle.textContent;
-    modalDetails.textContent = cardText.textContent;
+    // modalDetails.textContent = cardText.textContent;
 
     var link = document.createElement("a");
     link.textContent = "View More";
@@ -58,6 +58,7 @@ function createCard(data) {
     bootstrapModal.show();
   });
 
+  if (window.location.pathname === "/workout.html") return;
   workoutCardArea.appendChild(colDiv);
 }
 
@@ -82,6 +83,10 @@ fetch(url)
     for (var key in data) {
       dataArray.push(data[key]);
     }
+    for (var i = 0; i < dataArray.length; i++) {
+      writeData("workouts", dataArray[i]);
+      localStorage.setItem(i, JSON.stringify(dataArray[i]));
+    }
     updateUI(dataArray);
   });
 
@@ -89,7 +94,12 @@ if ("indexedDB" in window) {
   readAllData("workouts").then(function (data) {
     if (!networkDataReceived) {
       console.log("From cache", data);
-      updateUI(data);
+      var storedData = JSON.parse(localStorage.getItem("workouts"));
+      if (storedData) {
+        updateUI(storedData);
+      } else {
+        updateUI(data);
+      }
     }
   });
 }

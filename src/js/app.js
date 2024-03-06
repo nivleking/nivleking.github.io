@@ -1,20 +1,23 @@
+var installBtn = document.getElementById("installBtn");
 var deferredPrompt;
 
-if (deferredPrompt) {
-  deferredPrompt.prompt();
+installBtn.addEventListener("click", function () {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
 
-  deferredPrompt.userChoice.then(function (choiceResult) {
-    console.log(choiceResult.outcome);
+    deferredPrompt.userChoice.then(function (choiceResult) {
+      console.log(choiceResult.outcome);
 
-    if (choiceResult.outcome === "dismissed") {
-      console.log("User cancelled installation");
-    } else {
-      console.log("User added to home screen");
-    }
-  });
+      if (choiceResult.outcome === "dismissed") {
+        console.log("User cancelled installation");
+      } else {
+        console.log("User added to home screen");
+      }
+    });
 
-  deferredPrompt = null;
-}
+    deferredPrompt = null;
+  }
+});
 
 if (!window.Promise) {
   window.Promise = Promise;

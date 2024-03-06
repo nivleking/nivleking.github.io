@@ -16,6 +16,7 @@ var STATIC_FILES = [
   "/workout.html",
   "/src/css/bootstrap.min.css",
   "/src/js/bootstrap.bundle.min.js",
+  "https://fonts.googleapis.com/css2?family=Style+Script&display=swap",
   // "/src/images/icons/*",
   "/favicon.ico",
   // "/node_modules/*",
@@ -66,18 +67,19 @@ self.addEventListener("fetch", function (event) {
   if (event.request.url.indexOf(url) > -1) {
     // Network then cache strategy for specific URL
     event.respondWith(
-      fetch(event.request).then(function (res) {
-        var clonedRes = res.clone();
-        clearAllData("workouts")
-          .then(function () {
-            return clonedRes.json();
-          })
-          .then(function (data) {
-            for (var key in data) {
-              writeData("workouts", data[key]);
-            }
+      caches.match(event.request).then(function (response) {
+        if (response) {
+          // The resource is in the cache, return it directly
+          return response;
+        }
+
+        // The resource is not in the cache, fetch it and add it to the cache
+        return fetch(event.request).then(function (res) {
+          return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
+            cache.put(event.request.url, res.clone());
+            return res;
           });
-        return res;
+        });
       })
     );
   } else if (isInArray(event.request.url, STATIC_FILES)) {
