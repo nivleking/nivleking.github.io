@@ -62,60 +62,22 @@ function isInArray(string, array) {
 }
 
 self.addEventListener("fetch", function (event) {
-  var url = "https://zxcvbn-ba039-default-rtdb.asia-southeast1.firebasedatabase.app/workouts";
-
-  if (event.request.url.indexOf(url) > -1) {
-    // Network then cache strategy for specific URL
-    event.respondWith(
-      caches.match(event.request).then(function (response) {
-        if (response) {
-          // The resource is in the cache, return it directly
-          return response;
-        }
-
-        // The resource is not in the cache, fetch it and add it to the cache
-        return fetch(event.request).then(function (res) {
-          return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
-            cache.put(event.request.url, res.clone());
-            return res;
-          });
+  event.respondWith(
+    fetch(event.request)
+      .then(function (res) {
+        return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
+          cache.put(event.request, res.clone());
+          return res; // return the network response
         });
       })
-    );
-  } else if (isInArray(event.request.url, STATIC_FILES)) {
-    // Cache first strategy for static files
-    event.respondWith(
-      caches.match(event.request).then(function (response) {
-        return (
-          response ||
-          fetch(event.request).then(function (res) {
-            return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
-              cache.put(event.request.url, res.clone());
-              return res;
-            });
-          })
-        );
-      })
-    );
-  } else {
-    // Network then cache strategy for other requests
-    event.respondWith(
-      fetch(event.request)
-        .then(function (res) {
-          return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
-            cache.put(event.request.url, res.clone());
+      .catch(function () {
+        return caches.match(event.request).then(function (res) {
+          if (res) {
             return res;
-          });
-        })
-        .catch(function () {
-          return caches.match(event.request).then(function (res) {
-            if (res) {
-              return res;
-            } else if (event.request.headers.get("accept").includes("text/html")) {
-              return caches.match("/offline.html");
-            }
-          });
-        })
-    );
-  }
+          } else if (event.request.headers.get("accept").includes("text/html")) {
+            return caches.match("/offline.html"); // return the offline fallback page
+          }
+        });
+      })
+  );
 });

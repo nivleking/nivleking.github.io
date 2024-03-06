@@ -52,6 +52,10 @@ function createCard(data) {
     var link = document.createElement("a");
     link.textContent = "View More";
     link.href = "workout.html?name=" + encodeURIComponent(data.name) + "&detail=" + encodeURIComponent(data.detail) + "&image=" + encodeURIComponent(data.image);
+
+    if (modalDetails.hasChildNodes()) {
+      modalDetails.removeChild(modalDetails.lastChild);
+    }
     modalDetails.appendChild(link);
 
     var bootstrapModal = new bootstrap.Modal(modal);
