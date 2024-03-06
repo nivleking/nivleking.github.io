@@ -42,26 +42,25 @@
         <p id="workoutDetail" class="lead mt-3"></p>
     </div>
     <script>
-        window.onload = function () {
-            var urlParams = new URLSearchParams(window.location.search);
-            var name = urlParams.get('name');
-            var detail = urlParams.get('detail');
-            var image = urlParams.get('image');
-            var workoutImage = document.getElementById('workoutImage');
-
-            document.getElementById('workoutName').textContent = decodeURIComponent(name);
-            document.getElementById('workoutDetail').textContent = decodeURIComponent(detail);
-            workoutImage.src = decodeURIComponent(image);
-            workoutImage.style.width = '50%';
-            workoutImage.style.height = '50%';
+        if (!localStorage.getItem('now')) {
+            window.location = '/index.html';
         }
+        var data = JSON.parse(localStorage.getItem('now'));
+        document.getElementById('workoutName').innerText = data.name;
+        document.getElementById('workoutImage').src = data.image;
+        document.getElementById('workoutDetail').innerText = data.detail;
+        document.getElementById('workoutDetail').style.textAlign = 'justify';
+
+        document.getElementById('workoutImage').style.width = '50%';
+        document.getElementById('workoutImage').style.margin = 'auto';
     </script>
     <script src="/src/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/js/bootstrap.min.js"></script>
     <script src="/src/js/promise.js"></script>
     <script src="/src/js/fetch.js"></script>
     <script src="/src/js/idb.js"></script>
     <script src="/src/js/utility.js"></script>
-    <script src="/src/js/app.js"></script>
+    <!-- <script src="/src/js/app.js"></script> -->
     <script src="/src/js/card.js"></script>
 
 

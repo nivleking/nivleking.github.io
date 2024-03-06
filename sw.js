@@ -16,6 +16,15 @@ var STATIC_FILES = [
   "/workout.html",
   "/src/css/bootstrap.min.css",
   "/src/js/bootstrap.bundle.min.js",
+  "/src/js/bootstrap.min.js",
+  "/src/css/style.css",
+  // "/src/assets/images/1.jpg",
+  // "/src/assets/images/2.jpg",
+  // "/src/assets/images/3.jpg",
+  // "/src/assets/images/4.jpg",
+  // "/src/assets/images/5.jpg",
+  // "/src/assets/images/6.jpg",
+  // "/src/assets/images/7.jpg",
   "https://fonts.googleapis.com/css2?family=Style+Script&display=swap",
   // "/src/images/icons/*",
   "/favicon.ico",
@@ -49,7 +58,7 @@ self.addEventListener("activate", function (event) {
   return self.clients.claim();
 });
 
-// membaca index db
+// Membaca index db
 function isInArray(string, array) {
   var cachePath;
   if (string.indexOf(self.origin) === 0) {
@@ -61,13 +70,14 @@ function isInArray(string, array) {
   return array.indexOf(cachePath) > -1;
 }
 
+// Network first, then cache
 self.addEventListener("fetch", function (event) {
   event.respondWith(
     fetch(event.request)
       .then(function (res) {
         return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
           cache.put(event.request, res.clone());
-          return res; // return the network response
+          return res;
         });
       })
       .catch(function () {
@@ -75,7 +85,7 @@ self.addEventListener("fetch", function (event) {
           if (res) {
             return res;
           } else if (event.request.headers.get("accept").includes("text/html")) {
-            return caches.match("/offline.html"); // return the offline fallback page
+            return caches.match("/offline.html");
           }
         });
       })

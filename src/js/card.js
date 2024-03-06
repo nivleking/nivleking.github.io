@@ -35,35 +35,42 @@ function createCard(data) {
   cardTitle.textContent = data.name;
   cardBody.appendChild(cardTitle);
 
-  // var cardText = document.createElement("p");
-  // cardText.className = "card-text text-muted";
-  // cardText.style.textAlign = "justify";
-  // cardText.textContent = data.detail;
-  // cardBody.appendChild(cardText);
-
   cardWrapper.appendChild(cardBody);
   colDiv.appendChild(cardWrapper);
 
   colDiv.addEventListener("click", function () {
-    modalImg.src = cardImg.src;
-    modalName.textContent = cardTitle.textContent;
-    // modalDetails.textContent = cardText.textContent;
-
-    var link = document.createElement("a");
-    link.textContent = "View More";
-    link.href = "workout.html?name=" + encodeURIComponent(data.name) + "&detail=" + encodeURIComponent(data.detail) + "&image=" + encodeURIComponent(data.image);
-
-    if (modalDetails.hasChildNodes()) {
-      modalDetails.removeChild(modalDetails.lastChild);
-    }
-    modalDetails.appendChild(link);
-
-    var bootstrapModal = new bootstrap.Modal(modal);
-    bootstrapModal.show();
+    cardClicked(data.id);
   });
 
   if (window.location.pathname === "/workout.html") return;
   workoutCardArea.appendChild(colDiv);
+}
+
+function cardClicked(id) {
+  var url = "https://zxcvbn-ba039-default-rtdb.asia-southeast1.firebasedatabase.app/workouts/" + id + ".json";
+
+  if (!localStorage.getItem(id)) {
+    fetch(url)
+      .then(function (res) {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        localStorage.setItem(id, JSON.stringify(data));
+        localStorage.setItem("now", JSON.stringify(data));
+        window.location.href = "workout.html";
+      })
+      .catch(function (error) {
+        console.error("There has been a problem with your fetch operation:", error);
+        window.location.href = "offline.html";
+      });
+  } else {
+    localStorage.setItem("now", localStorage.getItem(id));
+    window.location.href = "workout.html";
+  }
 }
 
 function updateUI(data) {
@@ -89,7 +96,6 @@ fetch(url)
     }
     for (var i = 0; i < dataArray.length; i++) {
       writeData("workouts", dataArray[i]);
-      localStorage.setItem(i, JSON.stringify(dataArray[i]));
     }
     updateUI(dataArray);
   });
@@ -98,12 +104,7 @@ if ("indexedDB" in window) {
   readAllData("workouts").then(function (data) {
     if (!networkDataReceived) {
       console.log("From cache", data);
-      var storedData = JSON.parse(localStorage.getItem("workouts"));
-      if (storedData) {
-        updateUI(storedData);
-      } else {
-        updateUI(data);
-      }
+      updateUI(data);
     }
   });
 }
