@@ -59,8 +59,15 @@ self.addEventListener("fetch", function (event) {
     fetch(event.request)
       .then(function (res) {
         return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
-          cache.put(event.request, res.clone());
-          return res;
+          // Check if the request is already in the cache
+          return cache.match(event.request).then(function (cachedResponse) {
+            // If the request is not in the cache, add it
+            if (!cachedResponse) {
+              cache.put(event.request, res.clone());
+            }
+            // Return the fetched resource
+            return res;
+          });
         });
       })
       .catch(function () {
