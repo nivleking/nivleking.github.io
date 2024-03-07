@@ -57,27 +57,38 @@ self.addEventListener("activate", function (event) {
 self.addEventListener("fetch", function (event) {
   event.respondWith(
     fetch(event.request)
-      .then(function (res) {
-        return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
-          // Check if the request is already in the cache
-          return cache.match(event.request).then(function (cachedResponse) {
-            // If the request is not in the cache, add it
-            if (!cachedResponse) {
-              cache.put(event.request, res.clone());
-            }
-            // Return the fetched resource
-            return res;
-          });
-        });
+      .then(async function (res) {
+        const cache = await caches.open(CACHE_DYNAMIC_NAME);
+        cache.put(event.request.url, res.clone());
+        return res;
       })
-      .catch(function () {
-        return caches.match(event.request).then(function (res) {
-          if (res) {
-            return res;
-          } else if (event.request.headers.get("accept").includes("text/html")) {
-            return caches.match("/offline.html");
-          }
-        });
+      .catch(function (err) {
+        return caches.match(event.request);
       })
   );
 });
+
+// self.addEventListener("fetch", function (event) {
+//   event.respondWith(
+//     fetch(event.request)
+//       .then(function (res) {
+//         return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
+//           return cache.match(event.request).then(function (cachedResponse) {
+//             if (!cachedResponse) {
+//               cache.put(event.request, res.clone());
+//             }
+//             return res;
+//           });
+//         });
+//       })
+//       .catch(function () {
+//         return caches.match(event.request).then(function (res) {
+//           if (res) {
+//             return res;
+//           } else if (event.request.headers.get("accept").includes("text/html")) {
+//             return caches.match("/offline.html");
+//           }
+//         });
+//       })
+//   );
+// });
