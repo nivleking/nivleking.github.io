@@ -63,32 +63,14 @@ self.addEventListener("fetch", function (event) {
         return res;
       })
       .catch(function (err) {
-        return caches.match(event.request);
+        return caches.match(event.request)
+          .then(function (res) {
+            if (res) {
+              return res; // cached file
+            } else {
+              return caches.match('/offline.html'); // offline fallback page
+            }
+          });
       })
   );
 });
-
-// self.addEventListener("fetch", function (event) {
-//   event.respondWith(
-//     fetch(event.request)
-//       .then(function (res) {
-//         return caches.open(CACHE_DYNAMIC_NAME).then(function (cache) {
-//           return cache.match(event.request).then(function (cachedResponse) {
-//             if (!cachedResponse) {
-//               cache.put(event.request, res.clone());
-//             }
-//             return res;
-//           });
-//         });
-//       })
-//       .catch(function () {
-//         return caches.match(event.request).then(function (res) {
-//           if (res) {
-//             return res;
-//           } else if (event.request.headers.get("accept").includes("text/html")) {
-//             return caches.match("/offline.html");
-//           }
-//         });
-//       })
-//   );
-// });
