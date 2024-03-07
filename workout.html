@@ -42,10 +42,11 @@
         <p id="workoutDetail" class="lead mt-3"></p>
     </div>
     <script>
-        if (!localStorage.getItem('now')) {
+        if (!sessionStorage.getItem('now')) {
             window.location = '/index.html';
         }
-        var data = JSON.parse(localStorage.getItem('now'));
+        console.log(sessionStorage.getItem('now'));
+        var data = JSON.parse(sessionStorage.getItem('now'));
         var name1 = document.getElementById('workoutName');
         name1.textContent = data.name;
         //console.log(name);
@@ -64,8 +65,6 @@
     <!-- <script src="/src/js/bootstrap.min.js"></script> -->
     <script src="/src/js/promise.js"></script>
     <script src="/src/js/fetch.js"></script>
-    <script src="/src/js/idb.js"></script>
-    <script src="/src/js/utility.js"></script>
     <!-- <script src="/src/js/app.js"></script> -->
     <script src="/src/js/card.js"></script>
 

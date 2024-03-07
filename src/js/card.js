@@ -6,13 +6,6 @@ var modalName = document.getElementById("workoutName");
 var modalDetails = document.getElementById("workoutDetails");
 var workoutCardArea = document.getElementById("workout-cards");
 
-function clearCards() {
-  if (window.location.pathname === "/workout.html") return;
-  while (workoutCardArea.hasChildNodes()) {
-    workoutCardArea.removeChild(workoutCardArea.lastChild);
-  }
-}
-
 function createCard(data) {
   var colDiv = document.createElement("div");
   colDiv.className = "col-md-3 mb-3 mt-3 col-sm-4";
@@ -42,34 +35,14 @@ function createCard(data) {
     cardClicked(data.id);
   });
 
-  if (window.location.pathname === "/workout.html") return;
+  if (window.location.pathname !== "/index.html") return;
   workoutCardArea.appendChild(colDiv);
 }
 
-function cardClicked(id) {
-  var url = "https://zxcvbn-ba039-default-rtdb.asia-southeast1.firebasedatabase.app/workouts/" + id + ".json";
-
-  if (!localStorage.getItem(id)) {
-    fetch(url)
-      .then(function (res) {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        localStorage.setItem(id, JSON.stringify(data));
-        localStorage.setItem("now", JSON.stringify(data));
-        window.location.href = "workout.html";
-      })
-      .catch(function (error) {
-        console.error("There has been a problem with your fetch operation:", error);
-        window.location.href = "offline.html";
-      });
-  } else {
-    localStorage.setItem("now", localStorage.getItem(id));
-    window.location.href = "workout.html";
+function clearCards() {
+  if (window.location.pathname !== "/index.html") return;
+  while (workoutCardArea.hasChildNodes()) {
+    workoutCardArea.removeChild(workoutCardArea.lastChild);
   }
 }
 
@@ -80,6 +53,7 @@ function updateUI(data) {
   }
 }
 
+// From network
 var url = "https://zxcvbn-ba039-default-rtdb.asia-southeast1.firebasedatabase.app/workouts.json";
 var networkDataReceived = false;
 
@@ -94,17 +68,24 @@ fetch(url)
     for (var key in data) {
       dataArray.push(data[key]);
     }
-    for (var i = 0; i < dataArray.length; i++) {
-      writeData("workouts", dataArray[i]);
-    }
+    // for (var i = 0; i < dataArray.length; i++) {
+    //   writeData("workouts", dataArray[i]);
+    // }
     updateUI(dataArray);
   });
 
-if ("indexedDB" in window) {
-  readAllData("workouts").then(function (data) {
-    if (!networkDataReceived) {
-      console.log("From cache", data);
-      updateUI(data);
-    }
-  });
+function cardClicked(id) {
+  var url = "https://zxcvbn-ba039-default-rtdb.asia-southeast1.firebasedatabase.app/workouts/" + id + ".json";
+
+  // Session
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      sessionStorage.setItem(id, JSON.stringify(data));
+      sessionStorage.setItem("now", JSON.stringify(data));
+      window.location.href = "workout.html";
+    })
+    .catch((err) => {
+      window.location.href = "offline.html";
+    });
 }

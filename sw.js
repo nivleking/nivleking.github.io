@@ -58,18 +58,6 @@ self.addEventListener("activate", function (event) {
   return self.clients.claim();
 });
 
-// Membaca index db
-function isInArray(string, array) {
-  var cachePath;
-  if (string.indexOf(self.origin) === 0) {
-    console.log("matched ", string);
-    cachePath = string.substring(self.origin.length);
-  } else {
-    cachePath = string;
-  }
-  return array.indexOf(cachePath) > -1;
-}
-
 // Network first, then cache
 self.addEventListener("fetch", function (event) {
   event.respondWith(
