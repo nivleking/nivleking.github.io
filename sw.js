@@ -1,10 +1,10 @@
-var CACHE_STATIC_NAME = "static-v1";
-var CACHE_DYNAMIC_NAME = "dynamic-v1";
+var CACHE_STATIC_NAME = "static";
+var CACHE_DYNAMIC_NAME = "dynamic";
 var STATIC_FILES = [
   "/",
   "/index.html",
   "/offline.html",
-  "src/js/card.js",
+  "/src/js/card.js",
   "/src/js/app.js",
   "/src/js/promise.js",
   "/src/js/fetch.js",
