@@ -35,12 +35,12 @@ function createCard(data) {
     cardClicked(data.id);
   });
 
-  if (window.location.pathname !== "/index.html") return;
+  if (window.location.pathname === "/workout.html") return;
   workoutCardArea.appendChild(colDiv);
 }
 
 function clearCards() {
-  if (window.location.pathname !== "/index.html") return;
+  if (window.location.pathname === "/workout.html") return;
   while (workoutCardArea.hasChildNodes()) {
     workoutCardArea.removeChild(workoutCardArea.lastChild);
   }
@@ -68,9 +68,7 @@ fetch(url)
     for (var key in data) {
       dataArray.push(data[key]);
     }
-    // for (var i = 0; i < dataArray.length; i++) {
-    //   writeData("workouts", dataArray[i]);
-    // }
+    // console.log(dataArray);
     updateUI(dataArray);
   });
 
@@ -78,14 +76,19 @@ function cardClicked(id) {
   var url = "https://zxcvbn-ba039-default-rtdb.asia-southeast1.firebasedatabase.app/workouts/" + id + ".json";
 
   // Session
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      sessionStorage.setItem(id, JSON.stringify(data));
-      sessionStorage.setItem("now", JSON.stringify(data));
-      window.location.href = "workout.html";
-    })
-    .catch((err) => {
-      window.location.href = "offline.html";
-    });
+  if (!sessionStorage.getItem(id)) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        sessionStorage.setItem(id, JSON.stringify(data));
+        sessionStorage.setItem("now", JSON.stringify(data));
+        window.location.href = "/workout.html";
+      })
+      .catch((err) => {
+        window.location.href = "./offline.html";
+      });
+  } else {
+    sessionStorage.setItem("now", sessionStorage.getItem(id));
+    window.location.href = "/workout.html";
+  }
 }
