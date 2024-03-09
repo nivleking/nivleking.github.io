@@ -79,18 +79,19 @@ function cardClicked(id) {
   if (!sessionStorage.getItem(id)) {
     fetch(url)
       .then(function (response) {
-        response.json();
+        return response.json();
       })
       .then(function (data) {
         sessionStorage.setItem(id, JSON.stringify(data));
-        sessionStorage.setItem("currentCard", JSON.stringify(data));
+        sessionStorage.setItem("now", JSON.stringify(data));
         window.location.href = "/workout.html";
       })
       .catch(function (err) {
+        // alert("Offline from cardClicked");
         window.location.href = "./offline.html";
       });
   } else {
-    sessionStorage.setItem("currentCard", sessionStorage.getItem(id));
+    sessionStorage.setItem("now", sessionStorage.getItem(id));
     window.location.href = "/workout.html";
   }
 }

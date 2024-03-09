@@ -68,6 +68,7 @@ self.addEventListener("fetch", function (event) {
             if (res) {
               return res; // cached file
             } else {
+              // alert("Offline from SW");
               return caches.match('/offline.html'); // offline fallback page
             }
           });
