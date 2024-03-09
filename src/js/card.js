@@ -78,15 +78,13 @@ function cardClicked(id) {
   // Session
   if (!sessionStorage.getItem(id)) {
     fetch(url)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
+      .then((response) => response.json())
+      .then((data) => {
         sessionStorage.setItem(id, JSON.stringify(data));
         sessionStorage.setItem("now", JSON.stringify(data));
         window.location.href = "/workout.html";
       })
-      .catch(function (err) {
+      .catch((err) => {
         // alert("Offline from cardClicked");
         window.location.href = "/offline.html";
       });
