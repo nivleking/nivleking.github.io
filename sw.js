@@ -53,7 +53,7 @@ self.addEventListener("activate", function (event) {
   return self.clients.claim();
 });
 
-// Network first, then cache
+// Network first, then cache, with offline fallback
 self.addEventListener("fetch", function (event) {
   event.respondWith(
     fetch(event.request)

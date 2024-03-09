@@ -53,7 +53,7 @@ function updateUI(data) {
   }
 }
 
-// From network
+// Fetch dari network dulu
 var url = "https://zxcvbn-ba039-default-rtdb.asia-southeast1.firebasedatabase.app/workouts.json";
 var networkDataReceived = false;
 
@@ -78,17 +78,19 @@ function cardClicked(id) {
   // Session
   if (!sessionStorage.getItem(id)) {
     fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
+      .then(function (response) {
+        response.json();
+      })
+      .then(function (data) {
         sessionStorage.setItem(id, JSON.stringify(data));
-        sessionStorage.setItem("now", JSON.stringify(data));
+        sessionStorage.setItem("currentCard", JSON.stringify(data));
         window.location.href = "/workout.html";
       })
-      .catch((err) => {
+      .catch(function (err) {
         window.location.href = "./offline.html";
       });
   } else {
-    sessionStorage.setItem("now", sessionStorage.getItem(id));
+    sessionStorage.setItem("currentCard", sessionStorage.getItem(id));
     window.location.href = "/workout.html";
   }
 }
