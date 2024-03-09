@@ -88,7 +88,7 @@ function cardClicked(id) {
       })
       .catch(function (err) {
         // alert("Offline from cardClicked");
-        window.location.href = "./offline.html";
+        window.location.href = "/offline.html";
       });
   } else {
     sessionStorage.setItem("now", sessionStorage.getItem(id));
